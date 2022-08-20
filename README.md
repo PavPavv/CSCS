@@ -1,1 +1,1 @@
-# CSCS
+# My computer science cheat sheet
