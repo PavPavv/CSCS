@@ -27,3 +27,55 @@ function fromDecToBin(num) {
 
 console.log(fromDecToBin(202)) //  11001010
 ```
+
+Because assemblers vary widely, there are many different ways to represent binary literal constants in an assembly language program.
+**MASM** represents binary values as a sequence of binary digits ( 0 and 1 ) ending with a b or B (_1001b_). HLA preﬁxes binary values with the percent symbol ( % ). To make
+binary numbers more readable, HLA also allows you to insert underscores within binary strings like so (*%11_1011_0010_1101*).
+
+Hexadecimal representation offers two great features: it’s very compact, and it’s easy to convert between binary and hexadecimal. Hexadecimal representation uses the letters A through F for the additional six digits it requires (above the 10 standard decimal digits, 0–9). (_234_, _DEAD_, _BEEF_, _0AFB_, _FEED_, _DEAF_).
+One problem with hexadecimal representation is that it’s difﬁcult to differentiate hexadecimal values like “DEAD” from standard program identiﬁers.
+
+| Binary    | Decimal     |  Hexadecimal |
+|-----------|-------------|--------------|
+|  00000000 |      0      |       0      |
+|  00000001 |      1      |       1      |
+|  00000010 |      2      |       2      |
+|  00000011 |      3      |       3      |
+|  00000100 |      4      |       4      |
+|  00000101 |      5      |       5      |
+|  00000110 |      6      |       6      |
+|  00000111 |      7      |       7      |
+|  00001000 |      8      |       8      |
+|  00001001 |      9      |       9      |
+|  00001010 |     10      |       A      |
+|  00001011 |     11      |       B      |
+|  00001100 |     12      |       C      |
+|  00001101 |     13      |       D      |
+|  00001110 |     14      |       E      |
+|  00001111 |     15      |       F      |
+|  00010000 |     16      |      10      |
+
+
+To convert the hexadecimal representation of a number into binary, substitute the corresponding 4 bits for each hexadecimal digit. (_ABCD_ = _1010 1011 1100 1101_).
+
+*1C = 0001_1100*
+
+```javascript
+/**
+  @param {string} str
+  @return {number}
+  func('123') -> 123
+*/
+
+function myParseInt(str) {
+  let int = 0;
+  for (let i = 0; i < str.length; i++) {
+    const asciiCode = str[i].charCodeAt();
+    const digit = String.fromCharCode(asciiCode);
+    int += digit;
+  }
+  return int * 10 / 10;
+}
+console.log(myParseInt('123'));
+console.log(myParseInt('20458'));
+```
