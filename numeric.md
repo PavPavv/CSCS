@@ -1,4 +1,4 @@
-## 1. NUMERIC REPRESENTATION
+# 1. NUMERIC REPRESENTATION
 
 ## Numbering systems
 
@@ -181,5 +181,3 @@ One big problem with the fractional representations we’ve seen is thatthey pro
 ## Rational Representation
 
 Rational representation uses pairs of integers to represent fractional values. One integer represents the numerator ( n ) of a fraction, and the other represents the denominator ( d ).
-
-## BINARY ARITHMETIC AND BIT OPERATIONS
