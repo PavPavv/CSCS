@@ -109,3 +109,12 @@ The IEEE floating-point standard defines certain degenerate conditions under whi
 - Inexact result
 
 ### Floating-Point Operations
+
+#### Floating-Point Addition and Subtraction
+
+Addition and subtraction use essentially the same code. After all, computing X - Y is equivalent to computing X + (- Y) . If we can add a negative number to some other value, then we can also perform subtraction by first negating some number and then adding it to another value. And because the IEEE floating-point format uses the one’s complement representation, negating a value is trivial—we just invert the sign bit.
+
+#### Floating-Point Multiplication
+
+#### Floating-Point Division
+
