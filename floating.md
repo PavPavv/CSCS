@@ -118,3 +118,5 @@ Addition and subtraction use essentially the same code. After all, computing X -
 
 #### Floating-Point Division
 
+Floating-point division is a little bit more involved than multiplication because the IEEE ﬂoating-point standard says many things about degenerate conditions that can occur during division.
+
