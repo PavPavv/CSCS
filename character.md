@@ -5,7 +5,7 @@ data includes punctuation marks, numeric digits, spaces, tabs, carriage returns 
 
 Most computer systems use a 1-byte or multi-byte binary sequence to encode the various characters. Windows, macOS, and Linux fall into this category, using the ASCII or Unicode character sets, whose members can all be represented with 1- or multi-byte binary sequences.
 
-## 1. The ASCII Character Set
+## The ASCII Character Set
 
 The ASCII (American Standard Code for Information Interchange) character set maps 128 characters to the unsigned integer values 0 through 127.
 
@@ -30,4 +30,30 @@ An A on one machine is most likely an A on another system; but, of the 32 contro
 
 > Windows, MS-DOS, CP/M, and other systems mark end-of- line by the two-character sequence CR/LF. The original Apple Macintosh OS and many other systems mark end-of-line by a single CR character. Linux, BeOS, macOS, and other Unix systems mark end-of-line with a single LF character.
 
-## 2. The EBCDIC Character Set
+## The EBCDIC (Extended Binary Coded Decimal Interchange Code) Character Set
+
+Earlier IBM systems and keypunch machines used BCDIC (Binary Coded Decimal Interchange Code) , a character set based on punched cards and decimal representation (for IBM’s older decimal machines).
+
+## Double-Byte Character Sets
+
+Because a byte can represent a maximum of 256 characters, some computer systems use double-byte character sets (DBCSs) to represent more than 256 characters. DBCSs do not encode every character using 16 bits; instead, they use a single byte for most character encodings and use double-byte codes only for certain characters.
+
+## The Unicode Character Set
+
+The Unicode definition included all of the (known/living) character sets at the time, giving each character a unique encoding, to avoid the consistency problems that plagued differing DBCSs.
+The original Unicode standard used a 16-bit word to represent each character. Therefore, Unicode supported up to 65,536 different character codes—a huge advance over the 256 possible codes that are representable with an 8-bit byte.
+Today, Unicode is a universal character set, long replacing ASCII and older DBCSs. All modern operating systems (including macOS, Windows, Linux, iOS, Android, and Unix), web browsers, and most modern applications provide Unicode support.
+
+A Unicode code point is simply an integer value that Unicode associates with a particular character symbol; you can think of it as the Unicode equivalent of the ASCII code for a character. The convention for Unicode code points is to specify the value in hexadecimal with a U+prefix; for example, U+0041 is the Unicode code point for the letter A.
+
+Each Unicode code point has a unique name. For example, U+0045 has the name “LATIN CAPITAL LETTER A.” Note that the symbol A is not the name of the character. A is a glyph —a series of strokes (one horizontal and two slanted strokes) that a device draws in order to represent the character.
+
+There are many different glyphs for the single Unicode character “LATIN CAPITAL LETTER A.” For example, a Times Roman letter A and a Times Roman Italic letter A have different glyphs, but Unicode doesn’t differentiate between them (or between A characters in any two different fonts). The character “LATIN CAPITAL LETTER A” remains U+0045 regardless of the font or style you use to draw it.
+
+In Unicode, however, a character is largely equivalent to a code point. This is not what people normally think of as a character. In Unicode terminology, a grapheme cluster is what people commonly call a character —it’s a sequence of one or more Unicode code points that combine to form a single language element (that is, a single character). So, when we talk about characters with respect to symbols that an application displays to an end user, we’re really talking about **grapheme clusters**.
+
+
+
+
+
+
