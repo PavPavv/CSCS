@@ -52,8 +52,56 @@ There are many different glyphs for the single Unicode character “LATIN CAPITA
 
 In Unicode, however, a character is largely equivalent to a code point. This is not what people normally think of as a character. In Unicode terminology, a grapheme cluster is what people commonly call a character —it’s a sequence of one or more Unicode code points that combine to form a single language element (that is, a single character). So, when we talk about characters with respect to symbols that an application displays to an end user, we’re really talking about **grapheme clusters**.
 
+### Unicode Encodings
 
+**UTF-32** uses 32-bit integers to hold Unicode scalars. The advantage to this scheme is that a 32-bit integer can represent every Unicode scalar value (which requires only 21 bits). The obvious drawback to UTF-32 is that each Unicode scalar value requires 4 bytes of storage—twice that of the original Unicode definition and four times that of ASCII characters.
 
+**UTF-16** uses 16-bit (unsigned) integers to represent Unicode values. Because the vast majority of useful characters ﬁt into 16 bits, most UTF-16 characters require only 2 bytes. For those rare cases where surrogates are necessary, UTF-16 requires 2 words (32 bits) to represent the character.
 
+The **UTF-8** encoding is forward compatible from the ASCII character set. In particular, all ASCII characters have a single-byte representation (their original ASCII code, where the HO bit of the byte containing the character contains a 0 bit).
+UTF-8 encoding is probably the most common encoding in use. Most web pages use it. Most C standard library string functions will operate on UTF-8 text without modification (although some C standard library functions can produce malformed UTF-8 strings if the programmer isn’t careful with them).
 
+## Character Strings
+
+In general, a character string is a sequence of characters with two main attributes: a length and the character data.
+
+### Character String Formats
+
+#### Zero-Terminated Strings
+
+Without question, zero-terminated strings are the most common string representation in use today, because this is the native string format for C, C++, and several other languages.
+A zero-terminated ASCII string is a sequence containing zero or more 8-bit character codes ending with a byte containing **0**.
+
+#### Length-Preﬁxed Strings
+
+In a length-prefixed scheme (in Pascal), the string "abc" consists of 4 bytes: the length byte ( $03 ), followed by a , b , and c.
+
+#### Seven-Bit Strings
+
+The 7-bit string format is an interesting option that works for 7-bit encodings like ASCII. It uses the (normally unused) higher-order bit of the characters in the string to indicate the end of the string. All but the last character code in the string has its HO bit clear, and the last character in the string has its HO bit set.
+
+#### HLA Strings
+
+The HLA string format uses a 4-byte length prefix, allowing character strings to be just over four billion characters long (obviously, this is far more than any practical HLA application will use). HLA also appends a 0 byte to the character string data. The additional 4 bytes of overhead contain the maximum legal length for that string.
+
+#### Descriptor-Based Strings
+
+A slightly more flexible scheme is to maintain such information in a record structure, known as a descriptor , that also contains a pointer to the character data.
+
+#### Java Strings
+
+Java uses a descriptor-based string form. The actual String data type (that is, the structure/class that deﬁnes the internal representation of a Java string) is opaque , which means you really aren’t supposed to know about or mess with it.
+
+#### Swift Strings
+
+Like Java, the Swift programming language uses Unicode characters in its strings. As with Java, Swift’s String type is opaque, so you shouldn’t attempt to mess with (or otherwise use) its internal representation.
+
+#### C# Strings
+
+The C# programming language uses UTF-16 encoding for characters in its strings. As with Java and Swift, C#’s string type is opaque and you shouldn’t attempt to mess with (or otherwise use) its internal representation. That being said, the Microsoft documentation does claim that C# strings are an array of (Unicode) characters.
+
+#### Python Strings
+
+Today, modern
+versions of Python use a special string format that tracks the characters in strings and stores them as ASCII, UTF-8, UTF-16, or UTF-32, based on the most compact representation. You can’t really access the internal string representation directly within Python, so the caveats of opaque types aren’t relevant.
 
