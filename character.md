@@ -102,6 +102,21 @@ The C# programming language uses UTF-16 encoding for characters in its strings. 
 
 #### Python Strings
 
-Today, modern
-versions of Python use a special string format that tracks the characters in strings and stores them as ASCII, UTF-8, UTF-16, or UTF-32, based on the most compact representation. You can’t really access the internal string representation directly within Python, so the caveats of opaque types aren’t relevant.
+Today, modern versions of Python use a special string format that tracks the characters in strings and stores them as ASCII, UTF-8, UTF-16, or UTF-32, based on the most compact representation. You can’t really access the internal string representation directly within Python, so the caveats of opaque types aren’t relevant.
+
+Based on the various string formats covered thus far, we can now define three string types according to when the system allocates storage for the string. There are static, pseudo-dynamic, and dynamic strings.
+
+1. Pure static strings are those whose maximum size a programmer chooses when writing the program.
+
+```Pascal
+var pascalString :string(255);
+```
+
+```c
+char cString[256];
+```
+
+2. A pseudo-dynamic string is one whose length the system sets at runtime by calling a memory management function like **malloc()** to allocate storage for it.
+
+3. Dynamic string systems, which typically use a descriptor-based format, automatically allocate sufficient storage for a string object whenever you create a new string or otherwise do something that affects an existing string. Operations like string assignment and substring are relatively trivial in dynamic string systems—generally they copy only the string descriptor data, so these operations are fast.
 
