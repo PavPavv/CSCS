@@ -1,4 +1,4 @@
-# 5. CHARACTER REPRESENTATION
+# 4. CHARACTER REPRESENTATION
 
 The term character refers to a human-or machine-readable symbol that is typically a non-numeric entity. In addition to alphabetic characters, character
 data includes punctuation marks, numeric digits, spaces, tabs, carriage returns (the ENTER key), other control characters, and other special symbols.
@@ -120,3 +120,114 @@ char cString[256];
 
 3. Dynamic string systems, which typically use a descriptor-based format, automatically allocate sufficient storage for a string object whenever you create a new string or otherwise do something that affects an existing string. Operations like string assignment and substring are relatively trivial in dynamic string systems—generally they copy only the string descriptor data, so these operations are fast.
 
+## Creating character set
+
+ASCII and EBCDIC were developed with now-antiquated hardware in mind—mechanical teletypewriters’ keyboards and punched-card systems, respectively. Given that such equipment is
+found mainly in museums today, the layout of the codes in these character sets has almost no benefit in modern computer systems. If we could design our own character sets today, they’d be considerably different from ASCII or EBCDIC. They’d probably be based on modern keyboards (so they’d include codes for common keys, like LEFT ARROW, RIGHT ARROW , page up, and page down). They’d also be laid out to make various common computations a whole lot easier.
+Although the ASCII and EBCDIC character sets are not going away any time soon, there’s nothing stopping you from defining your own application-specific character set. Of course, such a set is, well, application-specific, and you won’t be able to share text files containing characters encoded in your custom character set with applications that are ignorant of your private encoding. But it’s fairly easy to translate between different character sets using a lookup table, so you can convert between your application’s internal character set and an external character set (like ASCII) when performing I/O operations.
+
+Using a single unsigned comparison to check if a character code is less than or equal to 9 , we can see if a character is a digit.
+
+> The character code and the numeric representation are one and the same
+
+> The lowercase characters have ASCII codes that are greater than the uppercase characters.
+
+To test a character to see if it’s a member of a single case, you need two comparisons—first to see if it’s alphabetic, then to determine its case.
+
+```c
+if( (c >= 76) && (c & 1) )
+{
+// execute this code if it's an uppercase character
+}
+if( (c >= 76) && !(c & 1) )
+{
+// execute this code if it's a lowercase character
+}
+```
+
+If you’re working in 80x86 assembly language, you can test a character to see if it’s uppercase or lowercase by using three machine instructions:
+
+```assembly
+// Note: ROR(1, AL) maps lowercase to the range $26..$3F (38..63)
+// and uppercase to $A6..$BF (166..191). Note that all other characters
+// get mapped to smaller values within these ranges.
+
+ror( 1, al );
+cmp( al, $26 );
+jnae NotLower;
+
+// Note: must be an unsigned branch!
+// Code that deals with a lowercase character.
+
+NotLower:
+
+// For uppercase, note that the ROR creates codes in the range $A8..$BF which
+// are negative (8-bit) values. They also happen to be the *most* negative
+// numbers that ROR will produce from the HyCode character set.
+
+ror( 1, al );
+cmp( al, $a6 );
+jge NotUpper;
+
+// Note: must be a signed branch!
+// Code that deals with an uppercase character.
+
+NotUpper:
+```
+
+Let’s first take a look at what the standard case-insensitive character comparison would look like in C/C++ for two ASCII characters:
+
+```c
+if( toupper( c ) == toupper( d ))
+{
+// do code that handles c==d using a case-insensitive comparison.
+}
+```
+
+This code doesn’t look too bad, but consider what the function (or, usually, macro) expands to:
+
+```c
+#define toupper(ch) ( (ch >= 'a' && ch <= 'z') ? ch & 0x5f : ch )
+```
+
+With this macro, you wind up with the following once the C preprocessor expands the previous if statement:
+
+```c
+if
+(
+( (c >= 'a' && c <= 'z') ? c & 0x5f : c )
+== ( (d >= 'a' && d <= 'z') ? d & 0x5f : d )
+)
+{
+// do code that handles c==d using a case-insensitive comparison.
+}
+```
+
+This expands to 80x86 code similar to this:
+
+```assembly
+// assume c is in cl and d is in dl.
+cmp( cl, 'a' ); // See if c is in the range 'a'..'z'
+jb NotLower;
+cmp( cl, 'z' );
+ja NotLower;
+and( $5f, cl ); // Convert lowercase char in cl to uppercase.
+NotLower:
+
+cmp( dl, 'a' ); // See if d is in the range 'a'..'z'
+jb NotLower2;
+cmp( dl, 'z' );
+ja NotLower2;
+and( $5f, dl ); // Convert lowercase char in dl to uppercase.
+NotLower2:
+
+
+cmp( cl, dl );  // Compare the (now uppercase if alphabetic) chars.
+
+jne NotEqual; // Skip the code that handles c==d if they're not equal.
+
+// do code that handles c==d using a case-insensitive comparison.
+NotEqual:
+```
+
+Several programs (beyond compilers) need to efficiently process strings of characters that represent program identifiers. Most languages allow alphanumeric characters in identifiers, and, as you just saw, we can check a character to see if it’s alphanumeric using only two comparisons.

@@ -12,7 +12,7 @@ _(1 × 2 ^7) + (1 × 2^6) + (0 × 2^5) + (0 × 2^4) + (1 × 2^3) + (0 × 2^2) + 
 function fromDecToBin(num) {
   const result = [];
 
-  function add(n){
+  function add(n) {
     if (n % 2 === 0) {
       result.push(0);
     } else {
@@ -25,43 +25,43 @@ function fromDecToBin(num) {
   }
   add(num);
   return +result.reverse().join('');
-};
+}
 
-console.log(fromDecToBin(202)) //  11001010
+console.log(fromDecToBin(202)); //  11001010
 ```
 
 Because assemblers vary widely, there are many different ways to represent binary literal constants in an assembly language program.
 **MASM** represents binary values as a sequence of binary digits ( 0 and 1 ) ending with a b or B (_1001b_). HLA preﬁxes binary values with the percent symbol ( % ). To make
-binary numbers more readable, HLA also allows you to insert underscores within binary strings like so (*%11_1011_0010_1101*).
+binary numbers more readable, HLA also allows you to insert underscores within binary strings like so (_%11_1011_0010_1101_).
 
 Hexadecimal representation offers two great features: it’s very compact, and it’s easy to convert between binary and hexadecimal. Hexadecimal representation uses the letters A through F for the additional six digits it requires (above the 10 standard decimal digits, 0–9). (_234_, _DEAD_, _BEEF_, _0AFB_, _FEED_, _DEAF_).
 One problem with hexadecimal representation is that it’s difﬁcult to differentiate hexadecimal values like “DEAD” from standard program identiﬁers.
 
-| Binary    | Decimal     |  Hexadecimal |
-|-----------|-------------|--------------|
-|  00000000 |      0      |       0      |
-|  00000001 |      1      |       1      |
-|  00000010 |      2      |       2      |
-|  00000011 |      3      |       3      |
-|  00000100 |      4      |       4      |
-|  00000101 |      5      |       5      |
-|  00000110 |      6      |       6      |
-|  00000111 |      7      |       7      |
-|  00001000 |      8      |       8      |
-|  00001001 |      9      |       9      |
-|  00001010 |     10      |       A      |
-|  00001011 |     11      |       B      |
-|  00001100 |     12      |       C      |
-|  00001101 |     13      |       D      |
-|  00001110 |     14      |       E      |
-|  00001111 |     15      |       F      |
-|  00010000 |     16      |      10      |
+| Binary   | Decimal | Hexadecimal |
+| -------- | ------- | ----------- |
+| 00000000 | 0       | 0           |
+| 00000001 | 1       | 1           |
+| 00000010 | 2       | 2           |
+| 00000011 | 3       | 3           |
+| 00000100 | 4       | 4           |
+| 00000101 | 5       | 5           |
+| 00000110 | 6       | 6           |
+| 00000111 | 7       | 7           |
+| 00001000 | 8       | 8           |
+| 00001001 | 9       | 9           |
+| 00001010 | 10      | A           |
+| 00001011 | 11      | B           |
+| 00001100 | 12      | C           |
+| 00001101 | 13      | D           |
+| 00001110 | 14      | E           |
+| 00001111 | 15      | F           |
+| 00010000 | 16      | 10          |
 
 ## Numeric/string conversions
 
 To convert the hexadecimal representation of a number into binary, substitute the corresponding 4 bits for each hexadecimal digit. (_ABCD_ = _1010 1011 1100 1101_).
 
-*1C = 0001_1100*
+_1C = 0001_1100_
 
 ```javascript
 /**
@@ -77,7 +77,7 @@ function myParseInt(str) {
     const digit = String.fromCharCode(asciiCode);
     int += digit;
   }
-  return int * 10 / 10;
+  return (int * 10) / 10;
 }
 console.log(myParseInt('123')); //  123
 console.log(myParseInt('20458')); //  20458
@@ -91,7 +91,7 @@ A "nibble" is a collection of 4 bits. Most computer systems don’t provide ef�
 
 A byte is 8 bits and is the smallest addressable data item on many CPUs; that is, the CPU can efficiently retrieve data in groups of 8 bits from memory. For this reason, the smallest data type that many languages support consumes 1 byte of memory (regardless of the actual number of bits the data type requires).
 
-A "word"_" is deﬁned differently depending on the CPU: it may be a 16-bit, 32-bit, or 64-bit object:
+A "word"\_" is deﬁned differently depending on the CPU: it may be a 16-bit, 32-bit, or 64-bit object:
 
 - 0 - bit
 - 0000 - "nibble" (precise hexadecimal digit)
@@ -100,19 +100,18 @@ A "word"_" is deﬁned differently depending on the CPU: it may be a 16-bit, 32-
 - 0000_0000_0000_0000_0000_0000_0000_0000 - 32-bit "word"
 - 0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000 - 64-bit "word"
 
-
 As noted, most CPUs efﬁciently handle objects up to a certain size (typically 32 or 64 bits on contemporary systems). That doesn’t mean you can’t work with larger objects, only that it’s less efﬁcient to do so.
 In general, with an n-bit string you can represent up to 2 n different values.
 
-|   Size of bit string  |  Number of possible combinations (2 n )                   |
-|-----------------------|-----------------------------------------------------------|
-| 1                     | 2                                                         |
-| 4                     | 16                                                        |
-| 8                     | 256                                                       |
-| 16                    | 65,536                                                    |
-| 32                    | 4,294,967,296                                             |
-| 64                    | 18,446,744,073,709,551,616                                |
-| 128                   | 340,282,366,920,938,463,463,374,607,431,768,211,456       |
+| Size of bit string | Number of possible combinations (2 n )              |
+| ------------------ | --------------------------------------------------- |
+| 1                  | 2                                                   |
+| 4                  | 16                                                  |
+| 8                  | 256                                                 |
+| 16                 | 65,536                                              |
+| 32                 | 4,294,967,296                                       |
+| 64                 | 18,446,744,073,709,551,616                          |
+| 128                | 340,282,366,920,938,463,463,374,607,431,768,211,456 |
 
 The two’s complement system uses the HO (high order) bit as a sign bit.
 
@@ -120,7 +119,7 @@ The two’s complement system uses the HO (high order) bit as a sign bit.
 
 What about negative numbers? To represent signed values, most computer systems use the two’s complement numbering system.
 With n bits, we can represent only 2^n different objects.
-In general, with n bits we can represent the signed values in the range *–2^(n–1) to +2^(n–1) – 1*.
+In general, with n bits we can represent the signed values in the range _–2^(n–1) to +2^(n–1) – 1_.
 The two’s complement system uses the HO bit as a sign bit. If the HO bit is 0 , the number is non-negative and has the usual binary encoding; if the HO bit is 1 , the number is negative and uses the two’s complement encoding.
 
 To negate a number, you can use the two’s complement operation as follows:
@@ -143,25 +142,25 @@ To negate a number, you can use the two’s complement operation as follows:
 - An n -bit value provides 2 n unique combinations of those bits.
 - The value 2 n –1 contains n bits, each containing the value.
 
-|   n  |    2^n  |
-|------|---------|
-|0     |  1      |
-| 1    |  2      |
-| 2    |  4      |
-| 3    |  8      |
-| 4    |  16     |
-| 5    |  32     |
-| 6    |  64     |
-| 7    |  128    |
-| 8    |  256    |
-| 9    |  512    |
-| 10   | 1,024   |
-| 11   | 2,048   |
-| 12   | 4,096   |
-| 13   | 8,19214 |
-| 14   | 16,384  |
-| 15   | 32,768  |
-| 16   | 65,536  |
+| n   | 2^n     |
+| --- | ------- |
+| 0   | 1       |
+| 1   | 2       |
+| 2   | 4       |
+| 3   | 8       |
+| 4   | 16      |
+| 5   | 32      |
+| 6   | 64      |
+| 7   | 128     |
+| 8   | 256     |
+| 9   | 512     |
+| 10  | 1,024   |
+| 11  | 2,048   |
+| 12  | 4,096   |
+| 13  | 8,19214 |
+| 14  | 16,384  |
+| 15  | 32,768  |
+| 16  | 65,536  |
 
 ## Sign Extension, Zero Extension, and Contraction
 

@@ -1,4 +1,4 @@
-# 4. FLOATING-POINT REPRESENTATION
+# 3. FLOATING-POINT REPRESENTATION
 
 ## Introduction to Floating-Point Arithmetic
 
@@ -23,7 +23,7 @@ Two seemingly equivalent floating-point computations will not necessarily produc
 
 ## IEEE (Institute of Electrical and Electronics Engineers) Floating-Point Formats
 
-When Intel planned to introduce a floating-point unit (FPU) for its original 8086 microprocessor, they created a format which is became  IEEE Std 754 floating-point format.
+When Intel planned to introduce a floating-point unit (FPU) for its original 8086 microprocessor, they created a format which is became IEEE Std 754 floating-point format.
 
 To handle a wide range of performance and accuracy requirements, Intel actually introduced three floating-point formats:
 
@@ -38,7 +38,7 @@ Extended precision contains 16 extra bits that long chains of computations can u
 
 The single-precision format uses a 24-bit mantissa and an 8-bit exponent (with 1 bit for a sign if it signed).
 
-0_000_0000____1000_0000_0000_0000_0000_0000
+0_000_0000\_\_\_\_1000_0000_0000_0000_0000_0000
 
 - 1 sign bit
 - 7 bits for exponent
@@ -53,7 +53,7 @@ One’s complement has the unusual property that there are two representations f
 
 The double-precision format helps overcome the problems of the single-precision floating-point.
 
-0_000_0000_0000____0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
+0_000_0000_0000\_\_\_\_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
 
 - 1 sign bit
 - 11 bits for exponent
@@ -61,7 +61,7 @@ The double-precision format helps overcome the problems of the single-precision 
 
 ### Extended-Precision Floating-Point Format
 
-0_000_0000_0000_0000____0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
+0_000_0000_0000_0000\_\_\_\_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
 
 - 1 sign bit
 - 15 bits for exponent
@@ -69,7 +69,7 @@ The double-precision format helps overcome the problems of the single-precision 
 
 ### Quad-Precision Floating-Point Format
 
-0_000_0000_0000_0000____0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
+0_000_0000_0000_0000\_\_\_\_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
 
 - 1 sign bit
 - 15 bits for exponent
@@ -119,4 +119,3 @@ Addition and subtraction use essentially the same code. After all, computing X -
 #### Floating-Point Division
 
 Floating-point division is a little bit more involved than multiplication because the IEEE ﬂoating-point standard says many things about degenerate conditions that can occur during division.
-

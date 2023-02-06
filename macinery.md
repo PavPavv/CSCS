@@ -22,16 +22,16 @@ programs without knowing the exact location of data in memory. All the programme
 
 Example of mnemonics to opcodes:
 
-| Mnemonic  | Opcode      |
-|-----------|-------------|
-|  add      |     000     |
-|  sub      |     001     |
-|  load     |     010     |
-|  store    |     011     |
-|  A        |     00      |
-|  B        |     01      |
-|  C        |     10      |
-|  D        |     11      |
+| Mnemonic | Opcode |
+| -------- | ------ |
+| add      | 000    |
+| sub      | 001    |
+| load     | 010    |
+| store    | 011    |
+| A        | 00     |
+| B        | 01     |
+| C        | 10     |
+| D        | 11     |
 
 The binary values representing both the opcodes and the register codes are arranged in one of a number of 16-bit (or 2-byte) formats to get a complete **machine language instruction**, which is a binary number that can be stored in RAM and used by the processor:
 
@@ -39,7 +39,7 @@ Byte 1
 0 - mode | 1 2 3 - opcode | 4 5 - source1 | 6 7 - source2 |
 
 Byte 2
-8 9 - destination     | 10 11 12 13 14 15 - 000000
+8 9 - destination | 10 11 12 13 14 15 - 000000
 
 ### The Programming Model
 
@@ -67,4 +67,3 @@ The microprocessor, in its power-on default state, is hard-wired to fetch that f
 At the end of the BIOS program lies a jump instruction, the target ofwhich is the location of a bootloader program. By using a jump, the BIOS hands off control of the system to this second program, whose job it is to search for and load the computer’s operating system from the hard disk. The operating system (OS) loads and unloads all of the other programs that run on the computer, so once the OS is up and running the computer is ready to interact with the user.
 
 ## PIPELINED EXECUTION
-

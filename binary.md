@@ -1,4 +1,3 @@
-
 # 3. BINARY ARITHMETIC AND BIT OPERATIONS
 
 ## Adding Binary Values
@@ -102,4 +101,3 @@ Here’s the C/C++/Swift code that accomplishes the operation shown in Figure 3-
 ```c++
 packedValue = (packedValue & 0xFFc000FF) | (ThirdField << 8 );
 ```
-
