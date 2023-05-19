@@ -122,3 +122,6 @@ if you paid an outrageous sum of money for expensive zero-wait-state RAM, you’
 
 Cache memory is a small amount of very fast memory that sits between the CPU and main memory. Unlike in normal memory, the bytes within a cache do not have fixed addresses.
 Cache memory can dynamically reassign addresses, which allows the system to keep recently accessed values in the cache. Addresses that the CPU has never accessed, or hasn’t accessed in some time, remain in main (slow) memory.
+
+To take advantage of temporal locality of reference, the CPU copies data into the cache whenever it accesses an address that’s not present in the cache. Because the system will likely access that address shortly, it can save wait states on future accesses by
+having that data in the cache.

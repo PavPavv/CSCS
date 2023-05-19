@@ -1,8 +1,10 @@
-# What is machine organization?
+# Common notes
+
+## What is machine organization?
 
 Machine organization is a subset of computer architecture that covers low-level data types, internal CPU organization, memory organization and access, low-level machine operations, mass storage organization, peripherals, and how computers communicate with the rest of the world.
 
-# What is great code?
+## What is great code?
 
 The great code is:
 
